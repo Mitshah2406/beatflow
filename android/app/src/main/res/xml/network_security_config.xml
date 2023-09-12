@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <!-- Include your trust anchors here if needed -->
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- Add domain exceptions here -->
+        <domain includeSubdomains="true">com.example.beatflow</domain>
+    </domain-config>
+</network-security-config>

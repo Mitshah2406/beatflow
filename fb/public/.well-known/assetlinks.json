@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.example.beatflow",
+            "sha256_cert_fingerprints": [
+                "F0:2C:89:06:54:EE:2B:61:D1:DA:25:B8:F2:E7:AF:34:4E:5E:C1:6D:37:4D:3E:FE:F8:B4:D6:05:22:D7:17:CA"
+            ]
+        }
+    }
+]

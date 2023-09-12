@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "368966927198",
+    "project_id": "beatflow-de29b",
+    "storage_bucket": "beatflow-de29b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368966927198:android:95a0ee107419ac75f785cf",
+        "android_client_info": {
+          "package_name": "com.example.beatflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368966927198-1rgjfl5e7s5k5f7pm1mpra6moq4fptcb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.beatflow",
+            "certificate_hash": "06882add709bd26f085e1dd9181c5443d0559ef3"
+          }
+        },
+        {
+          "client_id": "368966927198-ub2e8vmgjaa0do3qf4ptd4gtitgrm1ta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaKlPd96l5cznzJ4CaTOT8STM2OtBOQYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368966927198-ub2e8vmgjaa0do3qf4ptd4gtitgrm1ta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
