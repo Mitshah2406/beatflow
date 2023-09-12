@@ -1,6 +1,6 @@
 # beatflow
 
-A new Flutter project.
+A spotify clone (Beatflow) under development in Flutter
 
 ## Getting Started
 
