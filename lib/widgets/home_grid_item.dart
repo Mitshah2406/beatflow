@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HomeGridItem extends StatelessWidget {
-  const HomeGridItem({super.key});
-
+  const HomeGridItem({super.key, this.imageUrl, this.songName});
+  final String? songName;
+  final String? imageUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,13 +15,19 @@ class HomeGridItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Image.asset("assets/images/likedSongs.png"),
+          imageUrl != null
+              ? Image.network(imageUrl!)
+              : Image.asset("assets/images/likedSongs.png"),
           const SizedBox(
-            width: 8,
+            width: 6,
           ),
-          const Text(
-            "Liked Songs",
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+          Flexible(
+            child: Text(
+              songName ?? "Liked Songs",
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+            ),
           ),
         ],
       ),

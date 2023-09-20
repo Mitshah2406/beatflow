@@ -1,46 +1,44 @@
+import 'package:beatflow/models/Songs.dart';
+import 'package:beatflow/providers/api_provider.dart';
 import 'package:beatflow/widgets/home_grid_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class HomeGrid extends StatelessWidget {
-  const HomeGrid({super.key});
-
+class HomeGrid extends ConsumerWidget {
+  HomeGrid({super.key});
+  final logger = Logger();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final recentlyPlayedSongs = ref.watch(apiProvider);
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       sliver: SliverGrid(
-        delegate: SliverChildListDelegate(
-          [
-            // // const HomeGridItem(),
-            // Container(
-            //   clipBehavior: Clip.hardEdge,
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(6),
-            //     color: const Color.fromARGB(31, 213, 204, 204),
-            //   ),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.start,
-            //     children: [
-            //       Image.asset("assets/images/likedSongs.png"),
-            //       const SizedBox(
-            //         width: 8,
-            //       ),
-            //       Text(
-            //         data.toString(),
-            //         style: const TextStyle(
-            //             fontWeight: FontWeight.w600, fontSize: 15),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            const HomeGridItem(),
-            const HomeGridItem(),
-            const HomeGridItem(),
-            const HomeGridItem(),
-            const HomeGridItem(),
-            const HomeGridItem(),
-          ],
-        ),
+        delegate: SliverChildListDelegate([
+          const HomeGridItem(),
+          ...recentlyPlayedSongs.when(
+            data: (songs) {
+              logger.d(songs);
+              List<Widget> myData = songs
+                  .map((e) => HomeGridItem(
+                        songName: e.track!.name,
+                        imageUrl: e.track!.album!.images![0].url,
+                      ))
+                  .toList();
+              return myData;
+            },
+            error: (Object error, StackTrace stackTrace) {
+              return [Text(error.toString())];
+            },
+            loading: () {
+              return [
+                const Center(
+                  child: CircularProgressIndicator(),
+                )
+              ];
+            },
+          ),
+        ]),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 200.0,
           crossAxisSpacing: 12,

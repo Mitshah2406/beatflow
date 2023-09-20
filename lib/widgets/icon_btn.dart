@@ -11,9 +11,7 @@ class IconBtn extends StatelessWidget {
     return IconButton(
       icon: icon,
       color: Colors.white,
-      onPressed: () {
-        // Add your onPressed logic here
-      },
+      onPressed: onIconClick,
     );
   }
 }

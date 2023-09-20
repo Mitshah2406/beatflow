@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:beatflow/constants/spotify_details.dart';
-import 'package:beatflow/screens/home_screen.dart';
+import 'package:beatflow/screens/tabs_screen.dart';
 import 'package:beatflow/widgets/button.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -9,19 +9,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _AuthScreenState extends State<AuthScreen> {
   bool authGoing = false;
   Uri redirected_uri = Uri();
-  var controller;
+  var controller; //for webview
   Future<void> sendAuthentic() async {
-    // print(SpotifyDetails.redirectUri);
     Uri authorizationUrl = Uri.parse(await SpotifyDetails().getAuthUrl());
     final redirectUri =
         Uri.encodeFull('https://beatflow-de29b.firebaseapp.com/auth');
@@ -66,13 +65,12 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
               );
-              print("token_res");
-              print(response.data['access_token']);
+
               await prefs.setString(
                   'access_token', response.data['access_token']);
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (ctx) => const HomeScreen(),
+                  builder: (ctx) => const TabsScreen(),
                 ),
               );
               return NavigationDecision.prevent;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:logger/logger.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,6 +12,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
+  var logger = Logger();
   late AnimationController _controller;
   late Animation<double> animation;
   @override
@@ -34,11 +37,19 @@ class _SplashScreenState extends State<SplashScreen>
 
   navigateToMainContent() async {
     await Future.delayed(const Duration(milliseconds: 1000));
-    if (context.mounted) {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString("access_token");
+    logger.d("Token === $token");
+    logger.d(token != null);
+    logger.d(token != Null);
+    logger.d(token.runtimeType);
+    if (context.mounted && token != null) {
+      logger.i("Inside token not null");
       context.go('/home');
+    } else if (token == null) {
+      logger.i("Inside token not null");
+      context.go("/auth");
     }
-    // Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(builder: (ctx) => const MainScreen()));
   }
 
   @override
